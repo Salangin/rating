@@ -3,97 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <title>Рейтинг команд по WTR</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    table { border-collapse: collapse; width: 450px; }
-    th, td { border: 1px solid #555; padding: 8px 12px; text-align: center; }
-    th { background-color: #eee; }
-    button { padding: 5px 10px; cursor: pointer; }
-    #exportBtn { margin-top: 20px; padding: 7px 15px; font-size: 16px; }
-  </style>
 </head>
 <body>
 
 <h2>Рейтинг команд по штрафным баллам WTR</h2>
 
-<table id="teamsTable">
-  <thead>
-    <tr>
-      <th>Место</th>
-      <th>Команда</th>
-      <th>WTR</th>
-      <th>Действие</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
-
-<button id="exportBtn">Экспорт таблицы в файл</button>
-
-<script>
-  const teams = [
-    {name: "Команда A", wtr: 0},
-    {name: "Команда B", wtr: 0},
-    {name: "Команда C", wtr: 0},
-    {name: "Команда D", wtr: 0},
-    {name: "Команда E", wtr: 0},
-    {name: "Команда F", wtr: 0},
-    {name: "Команда G", wtr: 0},
-    {name: "Команда H", wtr: 0},
-    {name: "Команда I", wtr: 0},
-    {name: "Команда J", wtr: 0},
-  ];
-
-  const tbody = document.querySelector("#teamsTable tbody");
-
-  function renderTable() {
-    teams.sort((a,b) => a.wtr - b.wtr); // сортируем по возрастанию WTR
-    tbody.innerHTML = "";
-    teams.forEach((team, i) => {
-      const tr = document.createElement("tr");
-
-      const tdPlace = document.createElement("td");
-      tdPlace.textContent = i + 1;
-      tr.appendChild(tdPlace);
-
-      const tdName = document.createElement("td");
-      tdName.textContent = team.name;
-      tr.appendChild(tdName);
-
-      const tdWtr = document.createElement("td");
-      tdWtr.textContent = team.wtr;
-      tr.appendChild(tdWtr);
-
-      const tdBtn = document.createElement("td");
-      const btn = document.createElement("button");
-      btn.textContent = "+1 WTR";
-      btn.onclick = () => {
-        team.wtr++;
-        renderTable();
-      };
-      tdBtn.appendChild(btn);
-      tr.appendChild(tdBtn);
-
-      tbody.appendChild(tr);
-    });
-  }
-
-  renderTable();
-
-  document.getElementById("exportBtn").onclick = () => {
-    let text = "Место\tКоманда\tWTR\n";
-    teams.forEach((team, i) => {
-      text += `${i+1}\t${team.name}\t${team.wtr}\n`;
-    });
-    const blob = new Blob([text], {type: "text/plain;charset=utf-8"});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "teams_wtr_rating.txt";
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-</script>
-
 </body>
 </html>
+
